@@ -7,42 +7,58 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public int[] X;
-    public int[] A;
+    public static int[] X;
+    public static int[] A;
     public static ArrayList<Integer>[] graph;
     public static ArrayList<Integer>[] graphLength;
+    public static boolean explored = false;
 
 
     public static void log(Object args) {
         System.out.println(args.toString());
     }
 
+    public static void shortPath() {
+        int 
+        while (!explored) {
+            explored = true;
+            for (int i=0; i<X.length;i++){
+                if(X[i]>=0) {
+                    for (int j=0;j<graph[i].size();j++){
+                        if (X[graph[i].get(j)]<0){
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void init() {
+        X = new int[graph.length];
+        A = new int[graph.length];
+        X[0]=0;
+        A[0]=0;
+        for (int i= 1;i<X.length;i++) {
+            X[i]=-1;
+            A[i]=-1;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long startTime = System.nanoTime();
         log("Begin Program");
         log("End Program");
-        parseData();
-        log("da array list");
-        for (int i = 0;i<graph.length;i++){
-            for (int j=0;j<graph[i].size();j++){
-                System.out.print(graph[i].get(j) + " ");
-            }
-            System.out.println("");
-        }
-        log("da distances");
-        for (int i = 0;i<graphLength.length;i++){
-            for (int j=0;j<graphLength[i].size();j++){
-                System.out.print(graphLength[i].get(j) + " ");
-            }
-            System.out.println("");
-        }
+        parseData("4node");
+        init();
+
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
         log("Program ran for " + duration / 1000000 + " milliseconds");
     }
 
-    public static void parseData() throws IOException {
-        String[] arr = data("4node");
+    public static void parseData(String fileName) throws IOException {
+        String[] arr = data(fileName);
         graph = new ArrayList[arr.length];
         graphLength = new ArrayList[arr.length];
         Scanner sc;
