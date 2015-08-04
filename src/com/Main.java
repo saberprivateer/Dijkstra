@@ -1,9 +1,17 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by D on 8/3/2015.
  */
 public class Main {
+
+    public int[] X;
+    public int[] A;
+    public static ArrayList<Integer>[] graph;
+    public static ArrayList<Integer>[] graphLength;
+
 
     public static void log(Object args) {
         System.out.println(args.toString());
@@ -13,9 +21,46 @@ public class Main {
         long startTime = System.nanoTime();
         log("Begin Program");
         log("End Program");
+        parseData();
+        log("da array list");
+        for (int i = 0;i<graph.length;i++){
+            for (int j=0;j<graph[i].size();j++){
+                System.out.print(graph[i].get(j) + " ");
+            }
+            System.out.println("");
+        }
+        log("da distances");
+        for (int i = 0;i<graphLength.length;i++){
+            for (int j=0;j<graphLength[i].size();j++){
+                System.out.print(graphLength[i].get(j) + " ");
+            }
+            System.out.println("");
+        }
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        log("Program ran for "+duration/1000000+" milliseconds");
+        log("Program ran for " + duration / 1000000 + " milliseconds");
+    }
+
+    public static void parseData() throws IOException {
+        String[] arr = data("4node");
+        graph = new ArrayList[arr.length];
+        graphLength = new ArrayList[arr.length];
+        Scanner sc;
+        int n1;
+        int n2;
+        for (int i = 0;i<arr.length;i++) {
+            graph[i] = new ArrayList<Integer>(1);
+            graphLength[i] = new ArrayList<Integer>(1);
+            sc = new Scanner(arr[i]);
+            n1 = sc.nextInt();
+            sc.useDelimiter("\\D+");
+            while (sc.hasNextInt()){
+                n1 = sc.nextInt();
+                n2 = sc.nextInt();
+                graph[i].add(n1);
+                graphLength[i].add(n2);
+            }
+        }
     }
 
     public static String[] data(String datafile) throws IOException {
